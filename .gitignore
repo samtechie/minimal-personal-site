@@ -3,4 +3,5 @@ _site/
 .jekyll-metadata
 !/.gitignore
 .idea/
+.DS_Store
 Gemfile.lock
