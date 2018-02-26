@@ -3,7 +3,7 @@ layout: post
 title: How Convolutional Neural Networks Work.
 description: "Convolutional Neural Networks have been a revelation in image classification. However, how exaxtly do they work."
 author: Samuel Wasswa
-category: Deep Learning
+category: DeepLearning
 tags: CNN
 finished: true
 ---
