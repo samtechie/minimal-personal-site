@@ -95,7 +95,7 @@ If we look at the map we can see that our feature which is a diagonal line from 
 
 [![PixelMatch]({{ site.url }}/assets/convnets/convolution2.png){: .center-image }](https://brohrer.github.io/how_convolutional_neural_networks_work.html){:target="_blank"}
 
-This process is repeated for every feature and each feature we get a map which is consistent with what we would expect based on what we know about X and where we know our features will match.
+This process is repeated for every feature and for each feature we get a map which is consistent with what we would expect based on what we know about X and where we know our features will match.
 
 The process of **convolving** an image with a bunch of filters creates a stack of filtered images which is called a **convolution layer**. This layer can be stacked with other operations. Therefore in convolution an image becomes a stack of filtered images.
 
@@ -145,7 +145,7 @@ Our final layer is called the **Fully Connected Layer** where every value of the
 We connect each of values of our filtered images to one of the answers we are going to vote for.
 When we feed X into our CNN some of these values will be high and strongly imply that its an X and when feed O into our CNN some of these values will be high and also imply that its an O. The vote will depend on how strongly a value predicts X or O.
 
-Therefore when we get a new input and want to determine whether its an X or an O. The input will go through our Convolution Layers, ReLU layers and Pooling layers and in the fully connected layer, we get a series of votes and the based on the weights each value gets to vote with an average vote is calculated.
+Therefore when we get a new input and want to determine whether its an X or an O. The input will go through our Convolution Layers, ReLU layers and Pooling layers and in the fully connected layer, we get a series of votes and based on the weights each value gets to vote with,an average vote is calculated.
 
 [![CNN]({{ site.url }}/assets/convnets/cnn13.png){: .center-image }](https://brohrer.github.io/how_convolutional_neural_networks_work.html){:target="_blank"}
 
@@ -156,11 +156,11 @@ In the fully connected layer, a list of feature values becomes a list of votes a
 
 [![Fully Connected]({{ site.url }}/assets/convnets/fullyconnected3.png){: .center-image }](https://brohrer.github.io/how_convolutional_neural_networks_work.html){:target="_blank"}
 
-Therefore when put this altogether a two dimensional array of pixels becomes a set of votes for a category.
+Therefore when we put this altogether a two dimensional array of pixels becomes a set of votes for a category.
 
 [![Fully Connected]({{ site.url }}/assets/convnets/cnn14.png){: .center-image }](https://brohrer.github.io/how_convolutional_neural_networks_work.html){:target="_blank"}
 
-While we have presented a good intuitive way of understanding CNNs a lot of details have been left out. Where do the magic numbers come from?or where did the features in the convolution layers come from? Where do the voting weights in the fully connected layers come from? etc.
+While we have presented a good intuitive way of understanding CNNs a lot of details have been left out. Where do the magic numbers come from? where did the features in the convolution layers come from? Where do the voting weights in the fully connected layers come from? etc.
 
 The answer is a trick called **Backpropagation**. You don't have to know any of them. They are learned by the Neural Network.
 
@@ -168,7 +168,7 @@ The fundamental principle of backpropagation is that the error(right answer - ac
 
 [![Fully Connected]({{ site.url }}/assets/convnets/backprop.png){: .center-image }](https://brohrer.github.io/how_convolutional_neural_networks_work.html){:target="_blank"}
 
-This error signal drives a process called **Gradient descent** where each feature pixel and voting weight is adjusted up and down a bit to see how the error changes. Large errors lead to a large adjustment and small errors lead to a small adjustment. No error means no adjustment. It is analogous to sliding a ball slightly to the right or to the left on a hill and you want to find the direction where it goes downhill ( as you can see down means the error is reducing hence the name "Gradient descent"). You want to go down to the very bottom of the Gradient where the error is the least.
+This error signal drives a process called **Gradient descent** where each feature pixel and voting weight is adjusted up and down a bit to see how the error changes. Large errors lead to a large adjustment and small errors lead to a small adjustment. No error means no adjustment. It is analogous to sliding a ball slightly to the right or to the left on a hill and you want to find the direction where it goes downhill ( as you can see below down means the error is reducing hence the name "Gradient descent"). You want to go down to the very bottom of the Gradient where the error is the least.
 
 [![Fully Connected]({{ site.url }}/assets/convnets/cnn15.png){: .center-image }](https://brohrer.github.io/how_convolutional_neural_networks_work.html){:target="_blank"}
 
@@ -178,9 +178,9 @@ There are things called **Hyperparameters** which a designer of a CNN model gets
 
 In the convolution layer figuring out how many features should be used and the size of the features(pixels).
 
-In the pooling layers we have the choose the window size and window stride
+In the pooling layers we have to choose the window size and window stride
 
-In the fully connected layer chosing the number of hidden neurons.
+In the fully connected layer, choosing the number of hidden neurons.
 
 All these must be chosen by the designer. In practice there are common ways that have been proved to be effective but in general there are no hard and fast rules when dealing with hyperparameters. Adjusting them comes mostly from intuition and experience. In fact most advances in CNNs come from finding novel ways of combining them.
 
@@ -196,7 +196,9 @@ What we can we do for example for sound is to divide a sound signal into time st
 
 We can also divide the sound into different frequency bands like bass,midrange,treble etc and for the bands, those closer together are more related than those that are far away and the order matters.
 
-Once you do this to sound it looks like an image and you can therefore apply CNNs.
+The order mattering means the time steps and frequency bands must be in a specific order. If you change the order you will most likely lose the original sound.
+
+Once you do this to sound it looks like an image and you can apply CNNs.
 
 [![Fully Connected]({{ site.url }}/assets/convnets/cnn16.png){: .center-image }](https://brohrer.github.io/how_convolutional_neural_networks_work.html){:target="_blank"}
 
@@ -206,7 +208,7 @@ You can also do something similar with text where the position in the sentence b
 
 Its not really clear if order matters here because its not necessarily true that words in dictionary that are close to each other are related and therefore the trick is to take a window that spans the entire column from top to bottom and slide it left to right such that it captures all the words but only a few positions in the sentences at a time.
 
-CNNs are awesome but they have limitations because they only capture local "spatial" patterns where spatial means that patterns that are next to each other matter. If the data can't be made to look like an image they are not very useful. So basically as rule of thumb if data is as useful after swapping any of your columns with each other,then you can't use Convolutional Neural Networks.
+CNNs are awesome but they have limitations because they only capture local "spatial" patterns where spatial means that patterns that are next to each other matter. If the data can't be made to look like an image they are not very useful. So basically as rule of thumb if data is as useful after swapping any of your columns with each other, then you can't use Convolutional Neural Networks.
 
 CNNs are therefore good at finding patterns and using them to classify images.
 
