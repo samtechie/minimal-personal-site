@@ -3,7 +3,7 @@ layout: post
 title: "Beyond Agile: How Software Development can evolve to be anti-fragile."
 description: "Excerpts from a paper I wrote about how I think agile can evolve."
 author: Samuel Wasswa
-category: Software Development
+category: SoftwareDevelopment
 tags: Software
 finished: true
 ---
