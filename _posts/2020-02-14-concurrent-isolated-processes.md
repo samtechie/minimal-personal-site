@@ -45,15 +45,15 @@ In this instance if you kill the process. It will be restarted by a Supervisor b
 
 In a nutshell, an Elixir application is made of lots of isolated processes that run concurrently. Some of the processes are spawned automatically when the application starts and continue running for the lifetime of the application while other processes are spawned on demand and run for a relatively short amount of time.
 
-The Erlang VM starts a scheduler which runs the processes concurrently on the CPU.  However,running concurrently doesn't mean that all the processes are running at the same time. The scheduler actually allocates a slice of CPU time to a process. These slices of time are very small. When the time is up the scheduler "preempts" or "suspends" the running process and allocates time to another process. This is repeated multiple times for all processes which each process getting its turn.
+The Erlang VM starts a scheduler which runs the processes concurrently on the CPU.  However,running concurrently doesn't mean that all the processes are running at the same time. The scheduler actually allocates a slice of CPU time to a process. These slices of time are very small. When the time is up the scheduler "preempts" or "suspends" the running process and allocates time to another process. This is repeated multiple times for all processes with each process getting its turn.
 
 The scheduler switches between processes so fast that they appear to be running simultaneously. This is also known as **Preemptive multitasking/scheduling**. The advantage here is no process will tie up the CPU. Every process will get its fair share.
 
-It gets better because computers today have multiple CPU cores and to take advantage of these the VM creates a scheduler thread for each CPU core so a four core computer will have four schedulers and each of those schedulers is running multiple processes concurrently which means at any given point in time four processes are running at the same time i.e in **parallel**.
+It gets better because computers today have multiple CPU cores and to take advantage of these the VM creates a scheduler thread for each CPU core. So, a four core computer will have four schedulers and each of those schedulers will be running multiple processes concurrently. This means that at any given point in time four processes are running at the same time i.e in **parallel**.
 
-I hope you can appreciate how Elixir utilizes the Erlang VM to achieve concurrency and parallelism. The VM does impressive stuff behind the scenes with its schedulers and we get to take advantage of this for free without complex language constructs. Our applications almost scale naturally without having to do anything special.
+I hope you can appreciate how Elixir utilizes the Erlang VM to achieve concurrency and parallelism. The VM does impressive stuff behind the scenes with its schedulers and we get to take advantage of this for free without complex language constructs. Our applications almost scales naturally without having to do anything special.
 
-Next we will look at how these processes communicate with messages but if you want to get a different perspective to reinforce your knowledge about concurrency and parallelism check out this[ post ](http://nathanmlong.com/2017/06/concurrency-vs-paralellism/){:target="_blank"}.
+Next we will look at how these processes communicate with messages but if you want to get a different perspective to reinforce your knowledge about concurrency and parallelism, check out this[ post ](http://nathanmlong.com/2017/06/concurrency-vs-paralellism/){:target="_blank"}.
 
 I will leave you with this quote.
 
@@ -68,7 +68,7 @@ I will leave you with this quote.
 
 
 
-Side note: The `observer` tool is a great a way to visualize what's happening in the Erlang VM. You will begin to appreciate that the concept that the VM is an mini operating system for your code with multiple cooperating processes. Your can find more information in the [ Observer's User Guide](http://erlang.org/doc/apps/observer/observer_ug.html){:target="_blank"}.
+Side note: The `observer` tool is a great a way to visualize what's happening in the Erlang VM. You will begin to appreciate the concept that the VM is a mini operating system for your code with multiple cooperating processes. You can find more information in the [ Observer's User Guide](http://erlang.org/doc/apps/observer/observer_ug.html){:target="_blank"}.
 
 
 
