@@ -12,7 +12,7 @@ This is the first post in our series about understanding Elixir/OTP. You can che
 Elixir is highly scalable and fault tolerant because it leverages BEAM(Erlang Virtual Machine) concurrency. To appreciate the Erlang advantage, you must understand how Erlang's basic unit of concurrency, the process, handles multiple operations in an efficient way.
 
 > A BEAM process is a concurrent thread of execution
-> [ - Elixir in Action](https://www.manning.com/books/elixir-in-action-second-edition)
+> [ - Elixir in Action](https://www.manning.com/books/elixir-in-action-second-edition){:target="_blank"}
 
 BEAM processes are distinct from OS processes, they are lightweight and are handled by the VM. In fact the entire VM runs in a single OS process. An Elixir app has a lot of processes running simultaneously. In fact, all Elixir code runs in processes. For example, below were the number processes running on my machine.
 
@@ -53,7 +53,7 @@ It gets better because computers today have multiple CPU cores and to take advan
 
 I hope you can appreciate how Elixir utilizes the Erlang VM to achieve concurrency and parallelism. The VM does impressive stuff behind the scenes with its schedulers and we get to take advantage of this for free without complex language constructs. Our applications almost scale naturally without having to do anything special.
 
-Next we will look at how these processes communicate with messages but if you want to get a different perspective to reinforce your knowledge about concurrency and parallelism check out this[ post ](http://nathanmlong.com/2017/06/concurrency-vs-paralellism/).
+Next we will look at how these processes communicate with messages but if you want to get a different perspective to reinforce your knowledge about concurrency and parallelism check out this[ post ](http://nathanmlong.com/2017/06/concurrency-vs-paralellism/){:target="_blank"}.
 
 I will leave you with this quote.
 
@@ -64,11 +64,11 @@ I will leave you with this quote.
 >parallel execution can’t happen. You can achieve parallelism by adding more CPU cores
 >and relying on an efficient concurrent framework. But you should be aware that concurrency
 >itself doesn’t necessarily speed things up.
->[ - Elixir in Action](https://www.manning.com/books/elixir-in-action-second-edition).
+>[ - Elixir in Action](https://www.manning.com/books/elixir-in-action-second-edition){:target="_blank"}.
 
 
 
-Side note: The `observer` tool is a great a way to visualize what's happening in the Erlang VM. You will begin to appreciate that the concept that the VM is an mini operating system for your code with multiple cooperating processes. Your can find more information in the [ Observer's User Guide](http://erlang.org/doc/apps/observer/observer_ug.html).
+Side note: The `observer` tool is a great a way to visualize what's happening in the Erlang VM. You will begin to appreciate that the concept that the VM is an mini operating system for your code with multiple cooperating processes. Your can find more information in the [ Observer's User Guide](http://erlang.org/doc/apps/observer/observer_ug.html){:target="_blank"}.
 
 
 
