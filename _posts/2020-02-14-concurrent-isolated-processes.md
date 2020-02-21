@@ -7,7 +7,7 @@ category: Elixir
 tags: Software
 finished: true
 ---
-This is the first post in our series about understanding Elixir/OTP. You can check out the [introduction]({% post_url 2019-10-21-understanding-elixir-otp %}) which also contains links to all posts in this series.
+*This is the first post in our series about understanding Elixir/OTP. You can check out the [introduction]({% post_url 2019-10-21-understanding-elixir-otp %}).*
 
 Elixir is highly scalable and fault tolerant because it leverages BEAM(Erlang Virtual Machine) concurrency. To appreciate the Erlang advantage, you must understand how Erlang's basic unit of concurrency, the process, handles multiple operations in an efficient way.
 
@@ -25,7 +25,7 @@ So you may ask what all these processes are doing. A simple way to find out is t
 
 ![Observer]({{ site.url }}/assets/elixir/observer.png "Observer GUI")
 
-You will see all the processes running in the Erlang VM from the processes tab. In my case, am running a Phoenix application so there are some processes related to the Database connection and the web server. You also notice that the observer started its own processes. Elixir modules in the VM will be prefixed with `Elixir.` The rest are erlang modules. This is just a small snippet. There are many more processes running which I cannot show for brevity.
+You will see all the processes running in the Erlang VM from the processes tab. In my case, am running a Phoenix application so there are some processes related to the database connection and the web server. You also notice that the observer started its own processes. Elixir modules in the VM will be prefixed with `Elixir.` The rest are erlang modules. There are many more processes running which I cannot show for brevity.
 
 The `observer` enables us to see everything that's happening in the Erlang VM. This is why the VM can be thought of as mini operating system for your code. The `observer` doesn't stop there, we can also interact with running applications. So for example if we have a process that is problematic, we can kill it.
 
@@ -37,19 +37,19 @@ To get the PID of my `iex` session, I call `self`
     iex(3)> self()
     #PID<0.3631.0>
 
-I would then start the `observer` and look for the PID right click on the process and kill it as shown below. Neat!
+I would then start the `observer` and look for the PID, right click on the process and kill it as shown below. Neat!
 
 ![Kill]({{ site.url }}/assets/elixir/kill_process.png "Kill Process")
 
-In this instance if you kill the process. It will be restarted by a Supervisor but thats another topic for another time. However, its important to note that killing the process doesn't affect other processes because they are isolated.
+In this instance, if you kill the process it will be restarted by a Supervisor but thats another topic for another time. However, its important to note that killing the process doesn't affect other processes because they are isolated.
 
 In a nutshell, an Elixir application is made of lots of isolated processes that run concurrently. Some of the processes are spawned automatically when the application starts and continue running for the lifetime of the application while other processes are spawned on demand and run for a relatively short amount of time.
 
-The Erlang VM starts a scheduler which runs the processes concurrently on the CPU.  However,running concurrently doesn't mean that all the processes are running at the same time. The scheduler actually allocates a slice of CPU time to a process. These slices of time are very small. When the time is up the scheduler "preempts" or "suspends" the running process and allocates time to another process. This is repeated multiple times for all processes with each process getting its turn.
+The Erlang VM starts a scheduler which runs the processes concurrently on the CPU.  However,running concurrently doesn't mean that all the processes are running at the same time. The scheduler actually allocates a slice of CPU time to a process. These slices of time are very small. When the time is up the scheduler **"preempts"** or "suspends" the running process and allocates time to another process. This is repeated multiple times for all processes with each process getting its turn.
 
 The scheduler switches between processes so fast that they appear to be running simultaneously. This is also known as **Preemptive multitasking/scheduling**. The advantage here is no process will tie up the CPU. Every process will get its fair share.
 
-It gets better because computers today have multiple CPU cores and to take advantage of these the VM creates a scheduler thread for each CPU core. So, a four core computer will have four schedulers and each of those schedulers will be running multiple processes concurrently. This means that at any given point in time four processes are running at the same time i.e in **parallel**.
+It gets better because computers today have multiple CPU cores and to take advantage of these the VM creates a scheduler thread for each CPU core. So, a four core computer will have four schedulers and each of those schedulers will be running multiple processes concurrently. This means that at any given point in time four processes are running at the same time in **parallel**.
 
 I hope you can appreciate how Elixir utilizes the Erlang VM to achieve concurrency and parallelism. The VM does impressive stuff behind the scenes with its schedulers and we get to take advantage of this for free without complex language constructs. Our applications almost scales naturally without having to do anything special.
 
